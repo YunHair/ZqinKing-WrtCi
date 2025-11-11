@@ -1043,17 +1043,58 @@ update_nginx_ubus_module() {
     fi
 }
 
+# 修复 libnatpmp CMake 兼容性问题
+fix_libnatpmp_cmake() {
+    local cmake_file="$BUILD_DIR/feeds/packages/libs/libnatpmp/CMakeLists.txt"
+    
+    if [ -f "$cmake_file" ]; then
+        echo "🛠️ 修复 libnatpmp CMake 兼容性问题..."
+        
+        # 备份原文件
+        cp "$cmake_file" "$cmake_file.backup"
+        
+        # 更新 CMake 最低版本要求
+        sed -i 's/cmake_minimum_required(VERSION [0-9]\.[0-9])/cmake_minimum_required(VERSION 3.5)/g' "$cmake_file"
+        
+        # 如果上面没匹配到，使用更通用的方法
+        if grep -q "cmake_minimum_required(VERSION 2." "$cmake_file"; then
+            sed -i 's/cmake_minimum_required(VERSION 2\..*)/cmake_minimum_required(VERSION 3.5)/g' "$cmake_file"
+        fi
+        
+        echo "✅ libnatpmp CMake 版本要求已更新为 3.5"
+    fi
+}
+
+# 修复 Python 编译警告
+fix_python_compile_warnings() {
+    local python_makefile="$BUILD_DIR/feeds/packages/lang/python/Makefile"
+    
+    if [ -f "$python_makefile" ]; then
+        echo "修正 Python 编译警告..."
+        
+        # 添加禁用 PGO 的配置
+        if ! grep -q "--without-pgo" "$python_makefile"; then
+            sed -i '/CONFIGURE_ARGS.*=/a\\t--without-pgo \\' "$python_makefile"
+        fi
+        
+        echo "✅ Python 编译配置已修正"
+    fi
+}
+
 main() {
     clone_repo
     clean_up
     reset_feeds_conf
     update_feeds
+	fix_libnatpmp_cmake
     remove_unwanted_packages
     remove_tweaked_packages
     update_homeproxy
     fix_default_set
     fix_miniupnpd
     update_golang
+	# 🆕 添加 Python 编译修复（在 update_golang 之后）
+    fix_python_compile_warnings
     change_dnsmasq2full
     fix_mk_def_depends
     update_default_lan_addr
