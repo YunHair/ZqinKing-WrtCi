@@ -82,6 +82,14 @@ jobs:
                 find "$dir" -type f -exec touch {} +
             done
           fi
+          
+      - name: Fix libnatpmp CMake Issue
+        run: |
+          if [ -f "./action_build/feeds/packages/libs/libnatpmp/CMakeLists.txt" ]; then
+            echo "修复 libnatpmp CMake 兼容性问题..."
+            sed -i 's/cmake_minimum_required(VERSION 2\.[0-9])/cmake_minimum_required(VERSION 3.5)/g' ./action_build/feeds/packages/libs/libnatpmp/CMakeLists.txt
+            echo "修复完成"
+          fi
 
       - name: Build Firmware
         run: ./build.sh ${{ inputs.model }}
