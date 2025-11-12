@@ -1106,7 +1106,7 @@ main() {
     update_tcping
     add_ax6600_led
     set_custom_task
-    apply_passwall_tweaks
+    #apply_passwall_tweaks
     update_nss_pbuf_performance
     set_build_signature
     update_nss_diag
@@ -1120,7 +1120,7 @@ main() {
     add_timecontrol
     add_gecoosac
     add_quickfile
-    update_lucky
+    #update_lucky
     fix_rust_compile_error
     update_smartdns
     update_diskman
@@ -1133,7 +1133,7 @@ main() {
     fix_easytier_mk
     install_feeds
     fix_easytier_lua
-    update_adguardhome
+    #update_adguardhome
     update_script_priority
     update_geoip
     update_package "runc" "releases" "v1.2.6"
