@@ -84,30 +84,7 @@ jobs:
                 find "$dir" -type f -exec touch {} +
             done
           fi
-          
-      - name: Fix libnatpmp CMake Issue
-        run: |
-          if [ -f "./action_build/feeds/packages/libs/libnatpmp/CMakeLists.txt" ]; then
-            echo "=== 调试信息 ==="
-            echo "文件存在，开始修复..."
-            echo "原文件前5行内容："
-            head -5 "./action_build/feeds/packages/libs/libnatpmp/CMakeLists.txt"
-            
-            echo "=== 执行修复 ==="
-            # 多种匹配方式确保修复成功
-            sed -i 's/cmake_minimum_required(VERSION 2\.[0-9])/cmake_minimum_required(VERSION 3.5)/g' "./action_build/feeds/packages/libs/libnatpmp/CMakeLists.txt"
-            sed -i 's/cmake_minimum_required(VERSION 2\.6)/cmake_minimum_required(VERSION 3.5)/g' "./action_build/feeds/packages/libs/libnatpmp/CMakeLists.txt"
-            sed -i 's/cmake_minimum_required(VERSION 2\.8)/cmake_minimum_required(VERSION 3.5)/g' "./action_build/feeds/packages/libs/libnatpmp/CMakeLists.txt"
-            
-            echo "修复后文件前5行内容："
-            head -5 "./action_build/feeds/packages/libs/libnatpmp/CMakeLists.txt"
-            echo "=== 修复完成 ==="
-          else
-            echo "错误：libnatpmp CMakeLists.txt 文件不存在"
-            find "./action_build" -name "CMakeLists.txt" | grep libnatpmp || echo "未找到相关文件"
-          fi
-
-          
+                    
       - name: Build Firmware
         run: ./build.sh ${{ inputs.model }}
 
