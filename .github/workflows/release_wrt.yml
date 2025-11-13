@@ -1,9 +1,7 @@
 name: Release WRT
 run-name: Release - ${{ inputs.model }}
 
-on:
-  schedule:
-    - cron: '10 18 * * *'  
+on:  
   workflow_dispatch:
     inputs:
       model:
