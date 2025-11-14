@@ -1,5 +1,5 @@
 name: Auto Release WRT
-run-name: Release - ${{ env.MODEL }}
+run-name: Release - jdcloud_ipq60xx_libwrt
 
 on:
   schedule:
