@@ -83,13 +83,12 @@ update_feeds() {
     sed -i '/^#/d' "$FEEDS_PATH"
     sed -i '/packages_ext/d' "$FEEDS_PATH"
 
-    # 检查并添加 small-package 源
-    if ! grep -q "small-package" "$FEEDS_PATH"; then
-        # 确保文件以换行符结尾
-        [ -z "$(tail -c 1 "$FEEDS_PATH")" ] || echo "" >>"$FEEDS_PATH"
-        echo "src-git small8 https://github.com/YunHair/small-package" >>"$FEEDS_PATH"
-    fi
-
+    sed -i '/small-package/d' "$FEEDS_PATH"
+    sed -i '/small8/d' "$FEEDS_PATH"
+    
+    # 确保你的仓库在最前面
+    echo "src-git small8 https://github.com/YunHair/small-package" >>"$FEEDS_PATH"
+	
     # 添加bpf.mk解决更新报错
     if [ ! -f "$BUILD_DIR/include/bpf.mk" ]; then
         touch "$BUILD_DIR/include/bpf.mk"
