@@ -164,7 +164,7 @@ install_custom_feed() {
         luci-app-quickstart luci-app-istorex luci-app-cloudflarespeedtest netdata luci-app-netdata \
         lucky luci-app-lucky luci-app-openclash luci-app-homeproxy luci-app-amlogic \
         oaf open-app-filter luci-app-oaf easytier luci-app-easytier \
-        msd_lite luci-app-msd_lite cups luci-app-cupsd luci-app-advanced  luci-app-easymesh   luci-app-gecoosac     luci-app-wolplus 
+        msd_lite luci-app-msd_lite cups luci-app-cupsd luci-app-advanced    
     )
     local required_feed_dirs=(
         cups tcping v2ray-geodata luci-lib-taskd luci-app-openclash
@@ -195,6 +195,9 @@ install_custom_feed() {
         "sbwml/luci-app-mosdns|https://github.com/sbwml/luci-app-mosdns.git|v5|mosdns luci-app-mosdns"
         "Openwrt-Passwall/openwrt-passwall|https://github.com/Openwrt-Passwall/openwrt-passwall.git|main|luci-app-passwall"
         "nikkinikki-org/OpenWrt-nikki|https://github.com/nikkinikki-org/OpenWrt-nikki.git|main|nikki luci-app-nikki mihomo-meta"
+        "VIKINGYFY-packages|https://github.com/VIKINGYFY/packages.git||luci-app-gecoosac luci-app-wolultra    "
+        "torguardvpn/luci-app-easymesh|https://github.com/torguardvpn/luci-app-easymesh.git"  
+        "sirpdboy/luci-app-advancedplus|https://github.com/sirpdboy/luci-app-advancedplus.git" 
     )
 
     feeds_path=$(get_feeds_path)
