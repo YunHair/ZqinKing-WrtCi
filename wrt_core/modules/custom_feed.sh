@@ -195,9 +195,7 @@ install_custom_feed() {
         "sbwml/luci-app-mosdns|https://github.com/sbwml/luci-app-mosdns.git|v5|mosdns luci-app-mosdns"
         "Openwrt-Passwall/openwrt-passwall|https://github.com/Openwrt-Passwall/openwrt-passwall.git|main|luci-app-passwall"
         "nikkinikki-org/OpenWrt-nikki|https://github.com/nikkinikki-org/OpenWrt-nikki.git|main|nikki luci-app-nikki mihomo-meta"
-        "VIKINGYFY-packages|https://github.com/VIKINGYFY/packages.git||gecoosac luci-app-gecoosac luci-app-wolultra    "
-        "torguardvpn/luci-app-easymesh|https://github.com/torguardvpn/luci-app-easymesh.git||luci-app-easymesh"  
-        "sirpdboy/luci-app-advancedplus|https://github.com/sirpdboy/luci-app-advancedplus.git||luci-app-advancedplus" 
+        "VIKINGYFY-packages|https://github.com/VIKINGYFY/packages.git||gecoosac luci-app-gecoosac luci-app-wolultra    " 
     )
 
     feeds_path=$(get_feeds_path)
@@ -220,6 +218,21 @@ install_custom_feed() {
             return 1
         fi
     done
+
+        # ===== 新增部分开始 =====
+    # 单独处理单包仓库，它们不适合用稀疏检出
+    echo "正在从单包仓库同步 luci-app-easymesh..."
+    if ! sync_repo_root_package_to_feed_dir "https://github.com/torguardvpn/luci-app-easymesh.git" "main" "$custom_feed_dir" "torguardvpn/luci-app-easymesh" "luci-app-easymesh"; then
+        echo "警告：从 torguardvpn/luci-app-easymesh 拉取失败，将使用 kenzok8 源中的版本" >&2
+        # 注意这里不 return，让脚本继续，这样即使拉取失败也不会中断编译
+    fi
+
+    echo "正在从单包仓库同步 luci-app-advancedplus..."
+    if ! sync_repo_root_package_to_feed_dir "https://github.com/sirpdboy/luci-app-advancedplus.git" "main" "$custom_feed_dir" "sirpdboy/luci-app-advancedplus" "luci-app-advancedplus"; then
+        echo "警告：从 sirpdboy/luci-app-advancedplus 拉取失败，将使用 kenzok8 源中的版本" >&2
+        # 同样，这里不 return
+    fi
+    # ===== 新增部分结束 =====
 
     if ! sync_repo_root_package_to_feed_dir "https://github.com/adminchenyu/eMMC-Health.git" "main" "$custom_feed_dir" "adminchenyu/eMMC-Health" "luci-app-emmc-health"; then
         rm -rf "$custom_feed_dir"
