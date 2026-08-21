@@ -195,7 +195,7 @@ install_custom_feed() {
         "sbwml/luci-app-mosdns|https://github.com/sbwml/luci-app-mosdns.git|v5|mosdns luci-app-mosdns"
         "Openwrt-Passwall/openwrt-passwall|https://github.com/Openwrt-Passwall/openwrt-passwall.git|main|luci-app-passwall"
         "nikkinikki-org/OpenWrt-nikki|https://github.com/nikkinikki-org/OpenWrt-nikki.git|main|nikki luci-app-nikki mihomo-meta"
-        "VIKINGYFY-packages|https://github.com/VIKINGYFY/packages.git||luci-app-gecoosac luci-app-wolultra    "
+        "VIKINGYFY-packages|https://github.com/VIKINGYFY/packages.git||gecoosac luci-app-gecoosac luci-app-wolultra    "
         "torguardvpn/luci-app-easymesh|https://github.com/torguardvpn/luci-app-easymesh.git"  
         "sirpdboy/luci-app-advancedplus|https://github.com/sirpdboy/luci-app-advancedplus.git" 
     )
