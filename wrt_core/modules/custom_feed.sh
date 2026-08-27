@@ -164,7 +164,7 @@ install_custom_feed() {
         luci-app-quickstart luci-app-istorex luci-app-cloudflarespeedtest netdata luci-app-netdata \
         lucky luci-app-lucky luci-app-openclash luci-app-homeproxy luci-app-amlogic \
         oaf open-app-filter luci-app-oaf easytier luci-app-easytier \
-        msd_lite luci-app-msd_lite cups luci-app-cupsd luci-app-advanced luci-app-tailscale   
+        msd_lite luci-app-msd_lite cups luci-app-cupsd luci-app-advanced luci-app-tailscale  luci-app-wolplus luci-app-zerotier   
     )
     local required_feed_dirs=(
         cups tcping v2ray-geodata luci-lib-taskd luci-app-openclash
@@ -193,9 +193,9 @@ install_custom_feed() {
     custom_feed_sources=(
         "kenzok8/small-package|https://github.com/kenzok8/small-package.git||${base_custom_feed_packages[*]}"
         "sbwml/luci-app-mosdns|https://github.com/sbwml/luci-app-mosdns.git|v5|mosdns luci-app-mosdns"
-        "Openwrt-Passwall/openwrt-passwall|https://github.com/Openwrt-Passwall/openwrt-passwall.git|main|luci-app-passwall"
-        "nikkinikki-org/OpenWrt-nikki|https://github.com/nikkinikki-org/OpenWrt-nikki.git|main|nikki luci-app-nikki mihomo-meta"
-        "yunhair-package|https://github.com/YunHair/openwrt-package.git||gecoosac luci-app-gecoosac luci-app-wolultra usteer-ng luci-app-advancedplus luci-app-usteer " 
+        #"Openwrt-Passwall/openwrt-passwall|https://github.com/Openwrt-Passwall/openwrt-passwall.git|main|luci-app-passwall"
+        #"nikkinikki-org/OpenWrt-nikki|https://github.com/nikkinikki-org/OpenWrt-nikki.git|main|nikki luci-app-nikki mihomo-meta"
+        "yunhair-package|https://github.com/YunHair/openwrt-package.git||gecoosac luci-app-gecoosac luci-app-advancedplus lucky luci-app-lucky " 
     )
 
     feeds_path=$(get_feeds_path)
